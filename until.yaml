@@ -1,0 +1,16 @@
+---
+- hosts: linuxnodes
+  tasks:
+          - name: printls - Exists
+            shell: ls /etc
+            register: exists
+            until: exists is succeeded
+            retries: 10
+            delay: 2
+
+          - name: printls - Does not exist
+            shell: ls /etc/foo
+            register: doesnotexist
+            until: doesnotexist is succeeded
+            retries: 2
+            delay: 2
